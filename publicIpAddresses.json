@@ -1,0 +1,75 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.0",
+  "parameters": {
+    "domainNameLabel": {
+      "type": "string",
+      "defaultValue": null,
+      "metadata": {
+        "description": "Gets or sets the Domain name label.The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system."
+      }
+    },
+    "idleTimeoutInMinutes": {
+      "type": "int",
+      "metadata": {
+        "description": "The idle timeout of the public IP address."
+      }
+    },
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource name."
+      }
+    },
+    "publicIPAddressVersion": {
+      "type": "string",
+      "allowedValues": [
+        "IPv4",
+        "IPv6"
+      ],
+      "metadata": {
+        "description": "The public IP address version. Possible values are: 'IPv4' and 'IPv6'."
+      }
+    },
+    "publicIPAllocationMethod": {
+      "type": "string",
+      "allowedValues": [
+        "Dynamic",
+        "Static"
+      ],
+      "metadata": {
+        "description": "The public IP allocation method. Possible values are: 'Static' and 'Dynamic'."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "allowedValues": [
+        "Basic",
+        "Standard"
+      ]
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-09-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('name')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "[parameters('publicIPAllocationMethod')]",
+        "idleTimeoutInMinutes": "[parameters('idleTimeoutInMinutes')]",
+        "publicIpAddressVersion": "[parameters('publicIpAddressVersion')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('domainNameLabel')]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
