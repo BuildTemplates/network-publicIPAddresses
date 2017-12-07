@@ -57,6 +57,10 @@ Reference deployment
     }
   ],
   "outputs": {
+  "publicIpAddresses": {
+      "type": "object",
+      "value": "[reference('DeployPublicIpAddress').outputs.publicIpAddresses.value]"
+    }
   }
 }
 ```
