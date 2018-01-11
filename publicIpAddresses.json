@@ -64,7 +64,17 @@
           "domainNameLabel": "[parameters('domainNameLabel')]"
         }
       }
-    ]
+    ],
+    "publicIPAddresses":    {
+      "apiVersion": "2017-09-01",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[parameters('name')]",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "[parameters('sku')]"
+      },
+      "properties": "[if(empty(parameters('domainNameLabel')),variables('properties')[0],variables('properties')[1])]"
+    }
   },
   "resources": [
     {
@@ -79,5 +89,9 @@
     }
   ],
   "outputs": {
+    "publicIPAddresses":{
+      "type": "object",
+      "value":"[variables('publicIPAddresses')]"
+    }
   }
 }
