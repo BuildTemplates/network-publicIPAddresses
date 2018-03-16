@@ -47,6 +47,13 @@
         "Basic",
         "Standard"
       ]
+    },
+    "DependsOn": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Pass dependencies"
+      }
     }
   },
   "variables": {
@@ -65,11 +72,12 @@
         }
       }
     ],
-    "publicIPAddresses":    {
+    "publicIPAddresses": {
       "apiVersion": "2017-09-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "sku": {
         "name": "[parameters('sku')]"
       },
@@ -82,6 +90,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('name')]",
       "location": "[resourceGroup().location]",
+      "dependsOn": "[if(empty(parameters('DependsOn')),json('null'),parameters('DependsOn'))]",
       "sku": {
         "name": "[parameters('sku')]"
       },
