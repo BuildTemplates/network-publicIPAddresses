@@ -61,7 +61,7 @@
       {
         "publicIPAllocationMethod": "[parameters('publicIPAllocationMethod')]",
         "idleTimeoutInMinutes": "[parameters('idleTimeoutInMinutes')]",
-        "publicIpAddressVersion": "[parameters('publicIpAddressVersion')]",
+        "publicIpAddressVersion": "[parameters('publicIpAddressVersion')]"
       },
       {
         "publicIPAllocationMethod": "[parameters('publicIPAllocationMethod')]",
